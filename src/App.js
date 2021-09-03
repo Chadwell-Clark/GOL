@@ -80,6 +80,7 @@ function App() {
       <button
         onClick={() => {
           setGrid(clearGrid());
+          setIsRunning(false);
         }}
       >
         Clear
