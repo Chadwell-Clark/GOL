@@ -1,9 +1,9 @@
 import React, { useCallback, useRef, useState } from "react";
-import produce, { castDraft } from "immer";
+import produce from "immer";
 import "./App.css";
 
-const rowSize = 40;
-const colSize = 80;
+const rowSize = 75;
+const colSize = 150;
 
 const operations = [
   [0, 1],
@@ -61,48 +61,50 @@ function App() {
       });
     });
 
-    setTimeout(startGOL, 200);
+    setTimeout(startGOL, 60);
   }, []);
 
   return (
-    <>
-      <button
-        onClick={() => {
-          setIsRunning(!isRunning);
-          if (!isRunning) {
-            isRunningRef.current = true;
-            startGOL();
-          }
-        }}
-      >
-        {isRunning ? "Stop" : "Start"}
-      </button>
-      <button
-        onClick={() => {
-          setGrid(clearGrid());
-          setIsRunning(false);
-        }}
-      >
-        Clear
-      </button>
-      <button
-        onClick={() => {
-          const rows = [];
-          for (let i = 0; i < rowSize; i++) {
-            rows.push(
-              Array.from(Array(colSize), () => (Math.random() > 0.8 ? 1 : 0))
-            );
-          }
-          setGrid(rows);
-        }}
-      >
-        Random
-      </button>
+    <div className="GOL">
+      <div>
+        <button
+          onClick={() => {
+            setIsRunning(!isRunning);
+            if (!isRunning) {
+              isRunningRef.current = true;
+              startGOL();
+            }
+          }}
+        >
+          {isRunning ? "Stop" : "Start"}
+        </button>
+        <button
+          onClick={() => {
+            setGrid(clearGrid());
+            setIsRunning(false);
+          }}
+        >
+          Clear
+        </button>
+        <button
+          onClick={() => {
+            const rows = [];
+            for (let i = 0; i < rowSize; i++) {
+              rows.push(
+                Array.from(Array(colSize), () => (Math.random() > 0.8 ? 1 : 0))
+              );
+            }
+            setGrid(rows);
+          }}
+        >
+          Random
+        </button>
+      </div>
       <div
         className="grid"
         style={{
           display: "grid",
-          gridTemplateColumns: `repeat(${colSize}, 20px)`,
+          gridTemplateColumns: `repeat(${colSize}, 10px)`,
         }}
       >
         {grid.map((rows, i) =>
@@ -116,8 +118,8 @@ function App() {
                 setGrid(newGrid);
               }}
               style={{
-                width: 20,
-                height: 20,
+                width: 10,
+                height: 10,
                 backgroundColor: grid[i][j] ? "black" : undefined,
                 border: "solid 1px #c0c0c0",
               }}
@@ -125,7 +127,7 @@ function App() {
           ))
         )}
       </div>
-    </>
+    </div>
   );
 }
 
