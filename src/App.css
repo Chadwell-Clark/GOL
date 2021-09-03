@@ -37,4 +37,12 @@
   }
 }
 
-
+.GOL {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+.grid {
+  flex-direction: row;
+  justify-content: center;
+}
